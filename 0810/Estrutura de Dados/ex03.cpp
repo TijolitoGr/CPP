@@ -1,8 +1,5 @@
-// PROBLEMAS: DOUBLE ENTER NO VOID CRIAR_ENTRADA()
-
 #include <iostream>
 #include <string>
-#include <limits>
 using namespace std;
 
 /*3. Gestão de clientes de uma discoteca. Pretende–se um programa para a gestão de clientes
@@ -25,7 +22,7 @@ supondo que serão necessários, no máximo 600;
 
 3.4 Crie uma função para registar a entrada dos clientes;
 
-3.5 Crie uma função para inserir consumos;
+3.5 Crie uma função para inserir consumos aleatórios;
 
 3.6 Crie uma função para calcular a despesa de um cliente;
 
@@ -34,28 +31,41 @@ supondo que serão necessários, no máximo 600;
 3.8 Crie uma função que permita listar os produtos.*/
 
 struct Discoteca {
-    string produtos[10] = {"Agua", "Cerveja", "Sumo", "Vinho", "Martini", "Biscoitos", "Amendoins", "Tremocos", "Espeto", "Sandes"};
+    string produtos[10] = {"1 - Agua", "2 - Cerveja", "3 - Sumo", "4 - Vinho", "5 - Martini", "6 - Biscoitos", "7 - Amendoins", "8 - Tremocos", "9 - Espeto", "10 - Sandes"};
     double precos[10] = {1, 3, 2.5, 5, 6, 3, 1.5, 2.5, 4.5, 4};
     double consumos[10] = {};
     string cartao_nome[600] = {};
+    double despesa[600] = {};
+    int limite_despesas[600] = {};
     int next_card = 0;
-
-    void criar_entrada() {
+    int temp_pri = 0, temp_sec = 0;
+    
+    void registrar_entrada() {
         cout << "Insira o Nome do Cliente: ";
-        getline(cin, cartao_nome[next_card]);
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        next_card = next_card + 1;
+        getline(cin, cartao_nome[next_card]);
+        next_card++;
     };
 
     void criar_compra() {
-        // Implement logic for creating a purchase
-        // You can prompt the user for product code and quantity,
-        // then update the consumptions array accordingly.
+        cout << "Insira o ID do Cliente: ";
+        cin >> temp_pri;
+            if (limite_despesas[temp_pri] >= 11) {
+                cout << "Este cliente não poderá comprar mais nada.";
+                return;
+            }
+        cout << "O que pretende comprar?: ";
+        listar_produtos();
+        cout << "Opcao: ";
+        cin >> temp_sec;
+        despesa[temp_pri] = despesa[temp_pri] + precos[temp_sec];
+        limite_despesas[temp_pri]++;
     }
 
-    void ver_consumo() {
-        // Implement logic for viewing customer consumption
-        // You can display the consumption details or call a function for that
+    void ver_despesa() {
+        cout << "Insira o ID do Cliente: ";
+        cin >> temp_pri;
+        cout << "Despesa atual: " << despesa[temp_pri] << " Euros\n";
     }
 
     void numero_clientes() {
@@ -63,9 +73,11 @@ struct Discoteca {
     };
 
     void listar_produtos() {
+        cout << "\n##########################\n";
         for (int i = 0; i <= 9; i++) {
             cout << produtos[i] << " " << precos[i] << endl;
         }
+        cout << "##########################\n\n";
     };
 
     void limpar_cartoes() {
@@ -82,9 +94,9 @@ int main() {
     Discoteca Discoteca;
 
     do {
-        cout << "1 - Criar uma entrada\n";
+        cout << "1 - Registrar Entrada\n";
         cout << "2 - Criar uma compra\n";
-        cout << "3 - Ver o consumo de um Cliente\n";
+        cout << "3 - Ver Despesas\n";
         cout << "4 - Numero de Clientes\n";
         cout << "5 - Lista de Produtos\n";
         cout << "6 - Limpar Cartoes\n";
@@ -95,13 +107,13 @@ int main() {
 
         switch (opcao) {
         case 1:
-            Discoteca.criar_entrada();
+            Discoteca.registrar_entrada();
             break;
         case 2:
             Discoteca.criar_compra();
             break;
         case 3:
-            Discoteca.ver_consumo();
+            Discoteca.ver_despesa();
             break;
         case 4:
             Discoteca.numero_clientes();
