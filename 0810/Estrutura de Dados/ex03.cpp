@@ -1,4 +1,8 @@
+// PROBLEMAS: DOUBLE ENTER NO VOID CRIAR_ENTRADA()
+
 #include <iostream>
+#include <string>
+#include <limits>
 using namespace std;
 
 /*3. Gestão de clientes de uma discoteca. Pretende–se um programa para a gestão de clientes
@@ -39,6 +43,7 @@ struct Discoteca {
     void criar_entrada() {
         cout << "Insira o Nome do Cliente: ";
         getline(cin, cartao_nome[next_card]);
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         next_card = next_card + 1;
     };
 
@@ -54,7 +59,7 @@ struct Discoteca {
     }
 
     void numero_clientes() {
-        cout << "Numero de Clientes: " << next_card;
+        cout << "Numero de Clientes: " << next_card << "\n\n";
     };
 
     void listar_produtos() {
@@ -77,7 +82,6 @@ int main() {
     Discoteca Discoteca;
 
     do {
-        cout << "\n\nO que pretende fazer:\n";
         cout << "1 - Criar uma entrada\n";
         cout << "2 - Criar uma compra\n";
         cout << "3 - Ver o consumo de um Cliente\n";
@@ -87,6 +91,7 @@ int main() {
         cout << "0 - Sair do programa\n";
         cout << "Opcao a escolher: ";
         cin >> opcao;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (opcao) {
         case 1:
