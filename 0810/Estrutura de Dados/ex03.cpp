@@ -38,10 +38,10 @@ struct Discoteca {
     double despesa[600] = {};
     int limite_despesas[600] = {};
     int next_card = 0;
-    int temp_pri = 0, temp_sec = 0;
+    int temp_pri = 0, temp_sec = 0, temp_tre = 0;
     
-    void registrar_entrada() {
-        cout << "Insira o Nome do Cliente: ";
+    void registrar_entrada() { 
+        cout << "Insira o ID do Cliente: ";
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         getline(cin, cartao_nome[next_card]);
         next_card++;
@@ -51,7 +51,13 @@ struct Discoteca {
         cout << "Insira o ID do Cliente: ";
         cin >> temp_pri;
             if (limite_despesas[temp_pri] >= 11) {
-                cout << "Este cliente não poderá comprar mais nada.";
+                cout << "Este cliente nao podera comprar mais nada. Deseja liquidar o cartao?\n0 - Nao\n1 - Sim\nOpcao: ";
+                cin >> temp_tre;
+                if (temp_tre == 1) {
+                    registrar_entrada();
+                    despesa[next_card--] + 20; // Meter dinheiro como multa nao funciona
+                    cout << "Novo cartao [" << next_card-- << "] criado com exito!\n";
+                }
                 return;
             }
         cout << "O que pretende comprar?: ";
@@ -83,6 +89,8 @@ struct Discoteca {
     void limpar_cartoes() {
         for (int i = 0; i <= 599; i++) {
             cartao_nome[i] = "";
+            despesa[i] = 0;
+            limite_despesas[i] = 0;
         }
         next_card = 0;
     };
@@ -93,7 +101,7 @@ int main() {
 
     Discoteca Discoteca;
 
-    do {
+    do { // Meter "~" numa entrada de numeros faz repetidamente o comando
         cout << "1 - Registrar Entrada\n";
         cout << "2 - Criar uma compra\n";
         cout << "3 - Ver Despesas\n";
