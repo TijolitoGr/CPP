@@ -54,8 +54,8 @@ struct Discoteca {
                 cout << "Este cliente nao podera comprar mais nada. Deseja liquidar o cartao?\n0 - Nao\n1 - Sim\nOpcao: ";
                 cin >> temp_tre;
                 if (temp_tre == 1) {
+                    despesa[next_card] + 20;
                     registrar_entrada();
-                    despesa[next_card--] + 20; // Meter dinheiro como multa nao funciona
                     cout << "Novo cartao [" << next_card-- << "] criado com exito!\n";
                 }
                 return;
