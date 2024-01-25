@@ -97,9 +97,8 @@ struct Discoteca {
 };
 
 int main() {
-    int opcao = -1;
-
     Discoteca Discoteca;
+    int opcao = -1;
 
     do { // Meter "~" numa entrada de numeros faz repetidamente o comando
         cout << "1 - Registrar Entrada\n";
