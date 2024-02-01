@@ -63,6 +63,7 @@
     "string": "cpp",
     "iosfwd": "cpp",
     "ostream": "cpp",
-    "istream": "cpp"
+    "istream": "cpp",
+    "exception": "cpp"
   }
 }
