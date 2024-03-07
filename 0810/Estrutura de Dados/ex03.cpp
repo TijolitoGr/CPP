@@ -42,7 +42,6 @@ struct Discoteca {
     
     void registrar_entrada() { 
         cout << "Insira o ID do Cliente: ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         getline(cin, cartao_nome[next_card]);
         next_card++;
     };
@@ -110,7 +109,6 @@ int main() {
         cout << "0 - Sair do programa\n";
         cout << "Opcao a escolher: ";
         cin >> opcao;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (opcao) {
         case 1:
